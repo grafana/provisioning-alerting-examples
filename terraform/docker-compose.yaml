@@ -16,3 +16,4 @@ services:
       - GF_SMTP_ENABLED=true
       - GF_SMTP_HOST=smtp:25
       - GF_SMTP_SKIP_VERIFY=true
+      - GF_SMTP_FROM_ADDRESS=play-demo@grafana.com
