@@ -1,4 +1,5 @@
 
+#https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/message_template
 resource "grafana_message_template" "my_alert_subject" {
     name = "custom_email.subject"
     disable_provenance = true
@@ -21,7 +22,7 @@ resource "grafana_message_template" "my_alert_message" {
 EOT
 }
 
-
+#https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/contact_point
 resource "grafana_contact_point" "my_contact_point" {
   name = "My Contact Email Point"
   disable_provenance = true
@@ -33,8 +34,30 @@ resource "grafana_contact_point" "my_contact_point" {
   }
 }
 
+resource "grafana_mute_timing" "mute_timing_no_weekends" {
+  name = "no_weekends"
+  # disable_provenance = true (unsupported)
+
+  intervals {
+    weekdays = ["saturday", "sunday"]
+  }
+}
+
+#https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/notification_policy
 resource "grafana_notification_policy" "notification_policy_tree" {
-  contact_point = grafana_contact_point.my_contact_point.name
   disable_provenance = true
+  contact_point = grafana_contact_point.my_contact_point.name
   group_by      = ["grafana_folder", "alertname"]
+
+  policy {
+    contact_point = grafana_contact_point.my_contact_point.name
+
+    matcher {
+      label = "monitor"
+      match = "="
+      value = "testdata"
+    }
+
+    mute_timings = ["no_weekends"]
+  }
 }

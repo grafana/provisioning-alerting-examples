@@ -1,3 +1,5 @@
+# https://registry.terraform.io/providers/grafana/grafana/latest/docs
+
 terraform {
   required_providers {
     grafana = {

@@ -1,3 +1,5 @@
+
+# https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/dashboard
 # load dashboard from file and update UID variables with local values
 
 data "template_file" "custom_dashboard" {
