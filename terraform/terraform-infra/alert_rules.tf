@@ -18,8 +18,8 @@ resource "grafana_rule_group" "rule_group_0000" {
         to   = 0
       }
 
-      datasource_uid = local.testdata_datasource_uid
-      model          = "{\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"${local.testdata_datasource_uid}\"},\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"random_walk\"}"
+      datasource_uid = grafana_data_source.testdata_datasource.uid
+      model          = "{\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"${grafana_data_source.testdata_datasource.uid}\"},\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"random_walk\"}"
     }
     data {
       ref_id = "B"
@@ -47,7 +47,7 @@ resource "grafana_rule_group" "rule_group_0000" {
     no_data_state  = "NoData"
     exec_err_state = "Error"
     annotations = {
-      __dashboardUid__ = local.custom_dashboard_uid
+      __dashboardUid__ = grafana_dashboard.custom_dashboard.uid
       __panelId__      = "1"
     }
     labels = {

@@ -25,7 +25,7 @@
     {
       "datasource": {
         "type": "grafana-testdata-datasource",
-        "uid": "${testdata_datasource_uid}"
+        "uid": "${datasource_uid}"
       },
       "fieldConfig": {
         "defaults": {
@@ -105,7 +105,7 @@
         {
           "datasource": {
             "type": "grafana-testdata-datasource",
-	    "uid": "${testdata_datasource_uid}"
+	          "uid": "${datasource_uid}"
           },
           "refId": "A",
           "scenarioId": "random_walk"
@@ -129,7 +129,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "Custom Dashboard (Random Walk TestData)",
-  "uid": "${uid}",
+  "uid": "random-walk",
   "version": 1,
   "weekStart": ""
 }
