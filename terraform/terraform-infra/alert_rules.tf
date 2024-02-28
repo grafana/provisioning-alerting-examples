@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/rule_group
 
-resource "grafana_rule_group" "rule_group_0000" {
+resource "grafana_rule_group" "alert_rule_group1" {
   name             = "group_1m"
   disable_provenance = true
   folder_uid       = grafana_folder.test_folder.uid
