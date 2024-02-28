@@ -60,7 +60,7 @@ The alerting resources of this example are defined as Terraform resources in the
 
 ```
 
-To apply the Terraform configuration:
+To provision the Grafana resources, apply the Terraform configuration as follows:
 
 1. Move to the directory containing the terraform configuration files.
 	```bash
