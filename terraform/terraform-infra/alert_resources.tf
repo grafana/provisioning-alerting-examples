@@ -36,7 +36,9 @@ resource "grafana_contact_point" "my_contact_point" {
 
 resource "grafana_mute_timing" "mute_timing_no_weekends" {
   name = "no_weekends"
-  # disable_provenance = true (unsupported)
+
+  # unsupported https://github.com/grafana/terraform-provider-grafana/issues/1388
+  # disable_provenance = true 
 
   intervals {
     weekdays = ["saturday", "sunday"]
@@ -58,6 +60,6 @@ resource "grafana_notification_policy" "notification_policy_tree" {
       value = "testdata"
     }
 
-    mute_timings = ["no_weekends"]
+    mute_timings = [grafana_mute_timing.mute_timing_no_weekends.name]
   }
 }
