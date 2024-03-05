@@ -30,27 +30,38 @@ The provisioned configuration files of this example are available in the [`grafa
 ```mermaid
     erDiagram
 
-    custom_dashboard ||--|{ JSON-random-walk-dashboard : loaded_from
+    dashboard_yaml ||--|{ JSON-random-walk-dashboard : path
 
-    JSON-random-walk-dashboard ||--|{ testdata_datasource : targets
+    JSON-random-walk-dashboard ||--|{ datasource_yaml : ref_by_uid
 
-    alert_rule_group1 ||--|{ testdata_datasource : query
-    alert_rule_group1 ||--|{ custom_dashboard : links_to
+    JSON-random-walk-dashboard {
+        uid random-walk
+    }
+
+    datasource_yaml {
+        type test_data
+        uid testdata_uid
+    }
+
+    alert_rule_group1 ||--|{ datasource_yaml : query
+    alert_rule_group1 ||--|{ JSON-random-walk-dashboard : ref_by_uid
 
     notification_policy_tree ||--|{ nested_policy : includes
 
-    nested_policy ||--|{ my_contact_point : uses
+    nested_policy ||--|{ my_contact_point : ref_by_name_in_receiver
     nested_policy ||--|{ alert_rule_group1 : matches_with_monitor_label
-    nested_policy ||--|{ mute_timing_no_weekends : configured_with
+    nested_policy ||--|{ mute_timing : ref_by_name
 
-    my_contact_point ||--|{ my_alert_subject_template : uses
-    my_contact_point ||--|{ my_alert_message_template : uses
+    my_contact_point ||--|{ custom_email_subject_template : ref_in_subject
+    my_contact_point ||--|{ custom_email_message_template : ref_in_message
     my_contact_point {
-        email_addresses contact_point_email_variable
-        email_subject my_alert_subject_template
-        email_message my_alert_message_template
+        uid my_contact_email_point_uid
+
     }
 
+    mute_timing {
+        name no_weekends
+    }
 ```
 
 After running the Docker compose setup, you can access the Grafana instance at [localhost:3000](http://localhost:3000) and verify the provisioned Grafana resources.
