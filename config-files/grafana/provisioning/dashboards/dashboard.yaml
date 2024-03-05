@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: 'Default'
+    type: file
+    folder: 'TestFolder'
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/definitions

@@ -1,0 +1,85 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: group_1m
+      folder: TestFolder
+      interval: 1m
+      rules:
+        - uid: random_walk_threshold_uid 
+          title: random_walk_threshold
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: testdata_uid
+              model:
+                datasource:
+                    type: grafana-testdata-datasource
+                    uid: testdata_uid
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: A
+                scenarioId: random_walk
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: random-walk
+          panelId: 1
+          noDataState: NoData
+          execErrState: Error
+          for: 0s
+          annotations:
+            __dashboardUid__: random-walk
+            __panelId__: "1"
+          labels:
+            monitor: testdata
+          isPaused: false
