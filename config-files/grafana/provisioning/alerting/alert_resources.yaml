@@ -1,0 +1,48 @@
+apiVersion: 1
+muteTimes:
+    - orgId: 1
+      name: no_weekends
+      time_intervals:
+        - weekdays: [saturday, sunday]
+
+policies:
+    - orgId: 1
+      receiver: My Contact Email Point
+      group_by:
+        - grafana_folder
+        - alertname
+      routes:
+        - receiver: My Contact Email Point
+          object_matchers:
+            - - monitor
+              - =
+              - testdata
+          mute_time_intervals:
+            - no_weekends
+
+contactPoints:
+    - orgId: 1
+      name: My Contact Email Point
+      receivers:
+        - uid: my_contact_email_point_uid
+          type: email
+          settings:
+            addresses: your_email@company.org
+            message: '{{ template "custom_email.message" .}}'
+            singleEmail: false
+            subject: '{{ template "custom_email.subject" .}}'
+          disableResolveMessage: false
+
+templates:
+    - orgId: 1
+      name: custom_email.message
+      template: |
+        {{ define "custom_email.message" }}
+          Lorem ipsum - Custom alert!
+        {{ end }}
+    - orgId: 1
+      name: custom_email.subject
+      template: |
+        {{ define "custom_email.subject" }}
+        {{ len .Alerts.Firing }} firing alert(s), {{ len .Alerts.Resolved }} resolved alert(s)
+        {{ end }}
