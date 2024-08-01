@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   smtp:
     image: ixdotai/smtp:v0.5.2
