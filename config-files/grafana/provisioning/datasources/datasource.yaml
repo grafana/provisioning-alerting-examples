@@ -11,6 +11,3 @@ datasources:
     orgId: 1
     basicAuth: false
     isDefault: true
-    jsonData:
-      tlsAuth: false
-      tlsAuthWithCACert: false
