@@ -5,6 +5,7 @@ provider "registry.terraform.io/grafana/grafana" {
   version     = "3.7.0"
   constraints = ">= 3.7.0"
   hashes = [
+    "h1:0IZvNOQoXjY7HreNBmaqMzIhyfGtVPtnbUACRDc78so=",
     "h1:jyfKlCgZ0iI8rQnKVK59aZMhT4BlEezBF1Mr7RmktK0=",
     "zh:26d725b30360de5365d356c42cea31d5202caf782db8bd346d0ecf77d18ac9c5",
     "zh:2d431a39f057f183ba5fa423ff78486eb2cac6c18fdf5b2c4d4209fbd8960121",
@@ -26,22 +27,5 @@ provider "registry.terraform.io/grafana/grafana" {
     "zh:c788b29c98b39fa4d9dc76fc55d351774a261e98fe78dcc2bcf7d6fb36681cf1",
     "zh:cd5800d77269aa6570a014a0dfecdb16aba4d626dc6d81b41d60c5ed6c0c3120",
     "zh:d5e891bbfa980ce265100a2d48178804fe7e0823bc2c13f32f0a34a3a82facdc",
-  ]
-}
-
-provider "registry.terraform.io/hashicorp/template" {
-  version = "2.2.0"
-  hashes = [
-    "h1:0wlehNaxBX7GJQnPfQwTNvvAf38Jm0Nv7ssKGMaG6Og=",
-    "zh:01702196f0a0492ec07917db7aaa595843d8f171dc195f4c988d2ffca2a06386",
-    "zh:09aae3da826ba3d7df69efeb25d146a1de0d03e951d35019a0f80e4f58c89b53",
-    "zh:09ba83c0625b6fe0a954da6fbd0c355ac0b7f07f86c91a2a97849140fea49603",
-    "zh:0e3a6c8e16f17f19010accd0844187d524580d9fdb0731f675ffcf4afba03d16",
-    "zh:45f2c594b6f2f34ea663704cc72048b212fe7d16fb4cfd959365fa997228a776",
-    "zh:77ea3e5a0446784d77114b5e851c970a3dde1e08fa6de38210b8385d7605d451",
-    "zh:8a154388f3708e3df5a69122a23bdfaf760a523788a5081976b3d5616f7d30ae",
-    "zh:992843002f2db5a11e626b3fc23dc0c87ad3729b3b3cff08e32ffb3df97edbde",
-    "zh:ad906f4cebd3ec5e43d5cd6dc8f4c5c9cc3b33d2243c89c5fc18f97f7277b51d",
-    "zh:c979425ddb256511137ecd093e23283234da0154b7fa8b21c2687182d9aea8b2",
   ]
 }
