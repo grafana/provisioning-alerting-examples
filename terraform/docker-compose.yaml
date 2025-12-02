@@ -1,6 +1,6 @@
 services:
   smtp:
-    image: ixdotai/smtp:v0.5.2
+    image: ixdotai/smtp:v0.7.7@sha256:4f5f64a386ef8e024b60a45f9cac171f6229dd65eaad1d772337a1db64ba7f3d
     ports:
       - 127.0.0.1:25:25
   grafana:
