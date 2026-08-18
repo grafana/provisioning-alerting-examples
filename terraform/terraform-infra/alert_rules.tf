@@ -51,7 +51,10 @@ resource "grafana_rule_group" "alert_rule_group1" {
       __panelId__      = "1"
     }
     labels = {
-      monitor = "testdata"
+      # select the notification policy tree
+      __grafana_managed_route__ = grafana_apps_notifications_routingtree_v1beta1.team_backend.metadata.uid
+      team = "backend"
+      severity = "critical"
     }
     is_paused = false
   }

@@ -37,9 +37,11 @@ resource "grafana_contact_point" "my_contact_point" {
   }
 }
 
+
+
+#https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/mute_timing
 resource "grafana_mute_timing" "mute_timing_no_weekends" {
   name = "no_weekends"
-
   disable_provenance = true 
 
   intervals {
@@ -47,6 +49,7 @@ resource "grafana_mute_timing" "mute_timing_no_weekends" {
   }
 }
 
+/* Replaced by `routingtree_platform.tf` and `routingtree_backend.tf` resources
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/notification_policy
 resource "grafana_notification_policy" "notification_policy_tree" {
   disable_provenance = true
@@ -64,4 +67,4 @@ resource "grafana_notification_policy" "notification_policy_tree" {
 
     mute_timings = [grafana_mute_timing.mute_timing_no_weekends.name]
   }
-}
+}*/
