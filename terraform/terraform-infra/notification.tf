@@ -49,7 +49,6 @@ resource "grafana_mute_timing" "mute_timing_no_weekends" {
   }
 }
 
-/* Replaced by `routingtree_platform.tf` and `routingtree_backend.tf` resources
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/notification_policy
 resource "grafana_notification_policy" "notification_policy_tree" {
   disable_provenance = true
@@ -67,4 +66,4 @@ resource "grafana_notification_policy" "notification_policy_tree" {
 
     mute_timings = [grafana_mute_timing.mute_timing_no_weekends.name]
   }
-}*/
+}

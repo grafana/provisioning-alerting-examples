@@ -4,7 +4,7 @@ resource "grafana_contact_point" "backend_contact_point" {
   disable_provenance = true
 
   email {
-    addresses               = ["${var.contact_point_email}"]
+    addresses               = ["backend@example.com"]
   }
 }
 
@@ -14,7 +14,7 @@ resource "grafana_apps_notifications_routingtree_v1beta1" "team_backend" {
   ]
 
   metadata {
-    uid = "team-backend"
+    uid = "backend-routing-tree"
   }
   spec {
     disable_provenance = false

@@ -4,22 +4,13 @@ resource "grafana_contact_point" "platform_contact_point" {
   disable_provenance = true
 
   email {
-    addresses               = ["${var.contact_point_email}"]
+    addresses               = ["platform@example.com"]
   }
 }
 
 resource "grafana_apps_notifications_routingtree_v1beta1" "team_platform" {
-  # grafana_apps_notifications_routingtree_v1beta1 resources fail with
-  # "HTTP 500 - could not find object using provided id and hash" when created
-  # concurrently, so routing trees must be chained via depends_on and applied
-  # one at a time (arbitrarily ordered alphabetically here).
-  depends_on = [
-    grafana_contact_point.platform_contact_point,
-    grafana_apps_notifications_routingtree_v1beta1.team_backend,
-  ]
-
   metadata {
-    uid = "team-platform"
+    uid = "platform-routing-tree"
   }
   spec {
     disable_provenance = false

@@ -11,6 +11,6 @@ locals {
 }
 
 resource "grafana_dashboard" "custom_dashboard" {
-  folder = grafana_folder.test_folder.id
+  folder = grafana_folder.shared_alerting.id
   config_json = local.custom_dashboard
 }
