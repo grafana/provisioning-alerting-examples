@@ -1,10 +1,13 @@
 services:
   smtp:
-    image: ixdotai/smtp:v0.5.2@sha256:dd5edd14e801752e189b46b48ff91ea91b843a4efbf44ef7b691e1965394353f
+    image: axllent/mailpit:v1.22.3@sha256:f7f7c31de4de59540ad6515a0ca057a77525bca2069b6e747d873ca66c10fe08
+    environment:
+      - MP_SMTP_BIND_ADDR=0.0.0.0:25
     ports:
       - 127.0.0.1:25:25
+      - 127.0.0.1:8025:8025
   grafana:
-    image: grafana/grafana:${GRAFANA_VERSION:-12.0.2}
+    image: grafana/grafana:${GRAFANA_VERSION:-13.2.0}
     ports:
       - "3000:3000"
     environment:
