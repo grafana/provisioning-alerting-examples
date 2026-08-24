@@ -2,7 +2,8 @@
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/message_template
 resource "grafana_message_template" "my_alert_subject" {
     name = "custom_email.subject"
-    disable_provenance = true
+    # https://github.com/grafana/terraform-provider-grafana/issues/2618
+    # disable_provenance = true
 
     template = <<EOT
 {{ define "custom_email.subject" }}
@@ -13,7 +14,8 @@ EOT
 
 resource "grafana_message_template" "my_alert_message" {
     name = "custom_email.message"
-    disable_provenance = true
+    # https://github.com/grafana/terraform-provider-grafana/issues/2618
+    # disable_provenance = true
 
     template = <<EOT
 {{ define "custom_email.message" }}
@@ -25,10 +27,11 @@ EOT
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/contact_point
 resource "grafana_contact_point" "my_contact_point" {
   name = "My Contact Email Point"
-  disable_provenance = true
+  # https://github.com/grafana/terraform-provider-grafana/issues/2618
+  # disable_provenance = true
 
   email {
-    addresses               = ["${var.contact_point_email}"]
+    addresses               = ["oncall@example.com"]
     subject                 = "{{ template \"custom_email.subject\" .}}"
     message                 = "{{ template \"custom_email.message\" .}}"
   }
@@ -37,8 +40,7 @@ resource "grafana_contact_point" "my_contact_point" {
 resource "grafana_mute_timing" "mute_timing_no_weekends" {
   name = "no_weekends"
 
-  # unsupported https://github.com/grafana/terraform-provider-grafana/issues/1388
-  # disable_provenance = true 
+  disable_provenance = true 
 
   intervals {
     weekdays = ["saturday", "sunday"]

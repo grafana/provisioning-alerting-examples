@@ -15,15 +15,13 @@ To start Grafana, run the [docker-compose.yaml](./docker-compose.yaml) using the
 docker compose up -d
 ```
 
-This command starts a Grafana instance and a local `smtp` container for sending emails.
+This command starts a Grafana instance and a local `smtp` container ([mailpit](https://github.com/axllent/mailpit)) that catches emails for local testing.
 
 ```bash
  ✔ Container terraform-smtp-1     Running  0.0s
  ✔ Container terraform-grafana-1  Running  0.0s
 ```
-> ⚠ ️Note that your email provider may refuse emails from the local `smtp` server.
-> 
-> To fix this, you can configure your own SMTP Relay options setting up the [Grafana `smtp` options](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) in the [docker-compose.yaml](./docker-compose.yaml) or the [`smtp` docker container](https://github.com/ix-ai/smtp).
+> ⚠️ Mailpit doesn't deliver emails anywhere; it only captures them for local inspection. View sent emails at [localhost:8025](http://localhost:8025) instead of checking a real inbox.
 
 
 After running the Docker compose setup, you can access the Grafana instance at [localhost:3000](http://localhost:3000). 
@@ -53,7 +51,7 @@ The alerting resources of this example are defined as Terraform resources in the
     my_contact_point ||--|{ my_alert_subject_template : uses
     my_contact_point ||--|{ my_alert_message_template : uses
     my_contact_point {
-        email_addresses contact_point_email_variable
+        email_addresses oncall_example_com
         email_subject my_alert_subject_template
         email_message my_alert_message_template
     }
@@ -65,14 +63,6 @@ To provision the Grafana resources, apply the Terraform configuration as follows
 1. Move to the directory containing the terraform configuration files.
 	```bash
 	cd terraform-infra
-	```
-1.  Define your custom variables in a `.tfvars` file by copying the `terraform.tfvars.example` file.
-	```bash
-	cp terraform.tfvars.example terraform.tfvars
-	```
-1. Edit the custom variables in `terraform.tfvars` with the email to sent notifications.
-	```hcl
-	contact_point_email  ="your_email@company.org"
 	```
 
 1. Initialize the working directory.

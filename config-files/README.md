@@ -14,16 +14,14 @@ To start Grafana, run the [docker-compose.yaml](./docker-compose.yaml) using the
 docker compose up -d
 ```
 
-This command starts a Grafana instance and a local `smtp` container for sending emails.
+This command starts a Grafana instance and a local `smtp` container ([mailpit](https://github.com/axllent/mailpit)) that catches emails for local testing.
 
 ```bash
  ✔ Container terraform-smtp-1     Running  0.0s
  ✔ Container terraform-grafana-1  Running  0.0s
 ```
-> ⚠ ️Note that your email provider may refuse emails from the local `smtp` server.
-> 
-> To fix this, you can configure your own SMTP Relay options setting up the [Grafana `smtp` options](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#smtp) in the [docker-compose.yaml](./docker-compose.yaml) or the [`smtp` docker container](https://github.com/ix-ai/smtp).
-
+> ⚠️ Mailpit doesn't deliver emails anywhere; it only captures them for local inspection. View sent emails at [localhost:8025](http://localhost:8025) instead of checking a real inbox.
+>
 
 The provisioned configuration files of this example are available in the [`grafana/provisioning` folder](./grafana/provisioning/). The mermaid diagram below illustrates the primary provisioned Grafana resources in this project and their relationships.
 
