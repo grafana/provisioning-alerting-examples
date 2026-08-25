@@ -4,7 +4,7 @@ terraform {
   required_providers {
     grafana = {
       source  = "grafana/grafana"
-      version = ">= 3.25.0"
+      version = ">= 4.45.2"
     }
   }
 }
@@ -12,4 +12,16 @@ terraform {
 provider "grafana" {
   url = "http://localhost:3000"
   auth = "admin:admin"
+}
+
+module "backend" {
+  source = "./backend"
+
+  testdata_datasource_uid = grafana_data_source.testdata_datasource.uid
+}
+
+module "platform" {
+  source = "./platform"
+
+  testdata_datasource_uid = grafana_data_source.testdata_datasource.uid
 }

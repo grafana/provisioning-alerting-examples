@@ -27,8 +27,7 @@ EOT
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/contact_point
 resource "grafana_contact_point" "my_contact_point" {
   name = "My Contact Email Point"
-  # https://github.com/grafana/terraform-provider-grafana/issues/2618
-  # disable_provenance = true
+  disable_provenance = true
 
   email {
     addresses               = ["oncall@example.com"]
@@ -37,9 +36,11 @@ resource "grafana_contact_point" "my_contact_point" {
   }
 }
 
+
+
+#https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/mute_timing
 resource "grafana_mute_timing" "mute_timing_no_weekends" {
   name = "no_weekends"
-
   disable_provenance = true 
 
   intervals {

@@ -1,9 +1,8 @@
 # https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/rule_group
-
 resource "grafana_rule_group" "alert_rule_group1" {
   name             = "group_1m"
   disable_provenance = true
-  folder_uid       = grafana_folder.test_folder.uid
+  folder_uid       = grafana_folder.shared_alerting.uid
   interval_seconds = 60
 
   rule {
@@ -51,7 +50,8 @@ resource "grafana_rule_group" "alert_rule_group1" {
       __panelId__      = "1"
     }
     labels = {
-      monitor = "testdata"
+      team = "backend"
+      severity = "critical"
     }
     is_paused = false
   }
