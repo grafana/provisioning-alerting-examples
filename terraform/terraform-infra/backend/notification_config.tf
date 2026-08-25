@@ -9,10 +9,6 @@ resource "grafana_contact_point" "backend_contact_point" {
 }
 
 resource "grafana_apps_notifications_routingtree_v1beta1" "team_backend" {
-  depends_on = [
-    grafana_contact_point.backend_contact_point,
-  ]
-
   metadata {
     uid = "backend-routing-tree"
   }
