@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "grafana" {
-  url = "http://localhost:3000"
+  url  = "http://localhost:3000"
   auth = "admin:admin"
 }
 
@@ -24,4 +24,11 @@ module "platform" {
   source = "./platform"
 
   testdata_datasource_uid = grafana_data_source.testdata_datasource.uid
+
+  # The routing-tree API currently uses optimistic-concurrency
+  # hashing on the shared Alertmanager config. 
+  # Creating routing trees concurrently races on that hash and fails with:
+  #    "could not find object using provided id and hash".
+  # Run sequently so routing-tree writes never overlap.
+  depends_on = [module.backend]
 }
