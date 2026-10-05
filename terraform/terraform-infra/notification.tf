@@ -2,8 +2,7 @@
 #https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/message_template
 resource "grafana_message_template" "my_alert_subject" {
     name = "custom_email.subject"
-    # https://github.com/grafana/terraform-provider-grafana/issues/2618
-    # disable_provenance = true
+    disable_provenance = true
 
     template = <<EOT
 {{ define "custom_email.subject" }}
@@ -14,8 +13,7 @@ EOT
 
 resource "grafana_message_template" "my_alert_message" {
     name = "custom_email.message"
-    # https://github.com/grafana/terraform-provider-grafana/issues/2618
-    # disable_provenance = true
+    disable_provenance = true
 
     template = <<EOT
 {{ define "custom_email.message" }}
