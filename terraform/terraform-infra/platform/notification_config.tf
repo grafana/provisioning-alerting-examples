@@ -1,10 +1,10 @@
 
 resource "grafana_contact_point" "platform_contact_point" {
-  name = "Platform Contact Email Point"
+  name               = "Platform Contact Email Point"
   disable_provenance = true
 
   email {
-    addresses               = ["platform@example.com"]
+    addresses = ["platform@example.com"]
   }
 }
 
@@ -25,8 +25,8 @@ resource "grafana_apps_notifications_routingtree_v1beta1" "team_platform" {
 
     routes {
 
-      group_wait      = "0s"
-      group_interval  = "1m"
+      group_wait     = "0s"
+      group_interval = "1m"
       matchers = [
         {
           type  = "="

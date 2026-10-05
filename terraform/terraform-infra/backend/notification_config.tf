@@ -1,10 +1,10 @@
 
 resource "grafana_contact_point" "backend_contact_point" {
-  name = "Backend Contact Email Point"
+  name               = "Backend Contact Email Point"
   disable_provenance = true
 
   email {
-    addresses               = ["backend@example.com"]
+    addresses = ["backend@example.com"]
   }
 }
 
@@ -25,8 +25,8 @@ resource "grafana_apps_notifications_routingtree_v1beta1" "team_backend" {
 
     routes {
 
-      group_wait      = "0s"
-      group_interval  = "1m"
+      group_wait     = "0s"
+      group_interval = "1m"
       matchers = [
         {
           type  = "="

@@ -1,8 +1,7 @@
-# https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/rule_group
-resource "grafana_rule_group" "alert_rule_group1" {
+resource "grafana_rule_group" "backend_rule_group_1m" {
   name               = "group_1m"
   disable_provenance = true
-  folder_uid         = grafana_folder.shared_alerting.uid
+  folder_uid         = grafana_folder.backend_alerting.uid
   interval_seconds   = 60
 
   rule {
@@ -17,8 +16,8 @@ resource "grafana_rule_group" "alert_rule_group1" {
         to   = 0
       }
 
-      datasource_uid = grafana_data_source.testdata_datasource.uid
-      model          = "{\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"${grafana_data_source.testdata_datasource.uid}\"},\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"random_walk\"}"
+      datasource_uid = var.testdata_datasource_uid
+      model          = "{\"datasource\":{\"type\":\"grafana-testdata-datasource\",\"uid\":\"${var.testdata_datasource_uid}\"},\"intervalMs\":1000,\"maxDataPoints\":43200,\"refId\":\"A\",\"scenarioId\":\"random_walk\"}"
     }
     data {
       ref_id = "B"
@@ -45,14 +44,15 @@ resource "grafana_rule_group" "alert_rule_group1" {
 
     no_data_state  = "NoData"
     exec_err_state = "Error"
-    annotations = {
-      __dashboardUid__ = grafana_dashboard.custom_dashboard.uid
-      __panelId__      = "1"
-    }
+    annotations    = {}
     labels = {
-      team     = "backend"
       severity = "critical"
+      team     = "backend"
     }
     is_paused = false
+
+    notification_settings {
+      policy = grafana_apps_notifications_routingtree_v1beta1.team_backend.metadata.uid
+    }
   }
 }
